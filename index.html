@@ -8,12 +8,16 @@
   </head>
   <body>
     <div class="container">
-      <h1>Notepad</h1>
+      <h1>Simple Notepad</h1>
       <div class="toolbar">
         <button id="boldButton">B</button>
         <button id="italicButton">I</button>
         <button id="ulButton">UL</button>
         <button id="olButton">OL</button>
+        <button id="h1Button">H1</button>
+        <button id="h2Button">H2</button>
+        <button id="h3Button">H3</button>
+        <button id="printPreviewButton">Print Preview</button>
       </div>
       <div
         id="noteInput"
@@ -22,13 +26,28 @@
         placeholder="Type your note here..."
       ></div>
       <div id="wordCount">Word Count: 0</div>
+      <div class="category-selector">
+        <label for="categoryColor">Category Color: </label>
+        <select id="categoryColor">
+          <option value="">None</option>
+          <option value="#ffcccc">Red</option>
+          <option value="#ccffcc">Green</option>
+          <option value="#cce5ff">Blue</option>
+          <option value="#fff3cc">Yellow</option>
+          <option value="#e6ccff">Purple</option>
+        </select>
+      </div>
+      <button id="copyButton">Copy to Clipboard</button>
       <br />
-      <button class="bottombuttons" id="saveButton">Add Note</button>
-      <button class="bottombuttons" id="clearButton">Clear Input</button>
+      <div class="bottombuttons">
+        <button id="saveButton">Add Note</button>
+        <button id="clearButton">Clear Input</button>
+      </div>
       <h2>Your Notes</h2>
       <input type="text" id="searchInput" placeholder="Search notes..." />
       <ul id="noteList"></ul>
     </div>
+    <div id="printPreview" class="print-preview hidden"></div>
 
     <script src="script.js"></script>
   </body>

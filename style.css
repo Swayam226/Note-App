@@ -8,15 +8,17 @@ h1 {
     color: #333;
 }
 
-.container{
+.editor h1 { font-size: 24px; margin: 0.5em 0; }
+.editor h2 { font-size: 20px; margin: 0.5em 0; }
+.editor h3 { font-size: 18px; margin: 0.5em 0; }
+
+.toolbar { margin-bottom: 10px; }
+
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-
-.toolbar {
-    margin-bottom: 10px;
 }
 
 .toolbar button {
@@ -30,9 +32,7 @@ h1 {
     margin-right: 5px;
 }
 
-.toolbar button:hover {
-    background-color: #bbb;
-}
+.toolbar button:hover { background-color: #bbb; }
 
 .editor {
     width: 100%;
@@ -51,29 +51,41 @@ h1 {
     color: #999;
 }
 
-#wordCount {
-    font-size: 14px;
-    color: #666;
+#wordCount { font-size: 14px; color: #666; margin: 5px 0; }
+
+button { 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    background-color: #4CAF50; 
+    color: white; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+}
+
+button:hover { background-color: #45a049; }
+
+#copyButton {
+    background-color: #2196F3;
     margin: 5px 0;
 }
 
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
+#copyButton:hover {
+    background-color: #1976D2;
+}
+
+.category-selector {
+    margin: 5px 0;
+}
+
+.category-selector select {
+    padding: 5px;
+    font-size: 14px;
     border-radius: 4px;
-    cursor: pointer;
+    border: 1px solid #ccc;
 }
 
-button:hover {
-    background-color: #45a049;
-}
-
-.bottombuttons{
-    margin: 5px;
-}
+.bottombuttons { margin: 5px; }
 
 #searchInput {
     width: 100%;
@@ -85,13 +97,9 @@ button:hover {
     margin-bottom: 10px;
 }
 
-#noteList {
-    list-style-type: none;
-    padding: 0;
-}
+#noteList { list-style-type: none; padding: 0; }
 
 .note-item {
-    background-color: white;
     padding: 10px;
     margin: 5px 0;
     border: 1px solid #ccc;
@@ -101,33 +109,30 @@ button:hover {
     align-items: center;
 }
 
-.note-item button {
-    margin-left: 10px;
-    background-color: #ff4444;
+.note-item button { margin-left: 10px; background-color: #ff4444; }
+.note-item button:hover { background-color: #cc0000; }
+.note-item .edit-button { background-color: #2196F3; }
+.note-item .edit-button:hover { background-color: #1976D2; }
+.note-item .pin-button { background-color: #FFC107; }
+.note-item .pin-button:hover { background-color: #FFA000; }
+.pinned { background-color: #fff9c4 !important; }
+
+.print-preview {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    padding: 20px;
+    overflow: auto;
 }
 
-.note-item button:hover {
-    background-color: #cc0000;
+.print-preview-content {
+    background: white;
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 800px;
 }
 
-.note-item .edit-button {
-    background-color: #2196F3;
-    margin-left: 10px;
-}
-
-.note-item .edit-button:hover {
-    background-color: #1976D2;
-}
-
-.note-item .pin-button {
-    background-color: #FFC107;
-    margin-left: 10px;
-}
-
-.note-item .pin-button:hover {
-    background-color: #FFA000;
-}
-
-.pinned {
-    background-color: #fff9c4;
-}
+.hidden { display: none; }
