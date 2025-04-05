@@ -190,7 +190,7 @@ saveButton.addEventListener('click', function () {
                 pinnedNotes[pinnedNotes.indexOf(notes[editingIndex])] = noteText;
             }
             editingIndex = null;
-            saveButton.textContent = 'Add Note';
+            saveButton.textContent = 'Save Note';
         } else {
             notes.push(noteText);
             if (selectedColor) noteColors[notes.length - 1] = selectedColor;
