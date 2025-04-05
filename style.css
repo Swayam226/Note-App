@@ -9,8 +9,8 @@ h1 {
 }
 
 .editor h1 { font-size: 24px; margin: 0.5em 0; }
-.editor h2 { font-size: 20px; margin: 0.5em 0; }
-.editor h3 { font-size: 18px; margin: 0.5em 0; }
+/* .editor h2 { font-size: 20px; margin: 0.5em 0; }
+.editor h3 { font-size: 18px; margin: 0.5em 0; } */
 
 .toolbar { margin-bottom: 10px; }
 
@@ -136,3 +136,7 @@ button:hover { background-color: #45a049; }
 }
 
 .hidden { display: none; }
+
+.note-item.dragging {
+    opacity: 0.5;
+}

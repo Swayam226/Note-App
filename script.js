@@ -7,8 +7,6 @@ const italicButton = document.getElementById('italicButton');
 const ulButton = document.getElementById('ulButton');
 const olButton = document.getElementById('olButton');
 const h1Button = document.getElementById('h1Button');
-const h2Button = document.getElementById('h2Button');
-const h3Button = document.getElementById('h3Button');
 const searchInput = document.getElementById('searchInput');
 const wordCount = document.getElementById('wordCount');
 const printPreviewButton = document.getElementById('printPreviewButton');
@@ -73,6 +71,18 @@ function copyToClipboard() {
     document.body.removeChild(tempTextarea);
 }
 
+// Helper function to determine where to drop the note
+function getTargetIndex(e) {
+    const listItems = noteList.querySelectorAll('li');
+    for (let i = 0; i < listItems.length; i++) {
+        const rect = listItems[i].getBoundingClientRect();
+        if (e.clientY < rect.top + rect.height / 2) {
+            return i;
+        }
+    }
+    return listItems.length;
+}
+
 function loadNotes() {
     noteList.innerHTML = '';
     const searchTerm = searchInput.value.toLowerCase();
@@ -83,12 +93,45 @@ function loadNotes() {
             li.className = 'note-item';
             if (pinnedNotes.includes(note)) li.classList.add('pinned');
             if (noteColors[index]) li.style.backgroundColor = noteColors[index];
-            li.innerHTML = `
-                <span>${note}</span>
-                <button class="pin-button" onclick="togglePin(${index})">${pinnedNotes.includes(note) ? 'Unpin' : 'Pin'}</button>
-                <button class="edit-button" onclick="editNote(${index})">Edit</button>
-                <button onclick="deleteNote(${index})">Delete</button>
-            `;
+
+            // Create span for note content
+            const span = document.createElement('span');
+            span.innerHTML = note;
+            li.appendChild(span);
+
+            // Create pin button
+            const pinButton = document.createElement('button');
+            pinButton.className = 'pin-button';
+            pinButton.textContent = pinnedNotes.includes(note) ? 'Unpin' : 'Pin';
+            pinButton.onclick = () => togglePin(index);
+            pinButton.draggable = false; // Prevent buttons from triggering drag
+            li.appendChild(pinButton);
+
+            // Create edit button
+            const editButton = document.createElement('button');
+            editButton.className = 'edit-button';
+            editButton.textContent = 'Edit';
+            editButton.onclick = () => editNote(index);
+            editButton.draggable = false;
+            li.appendChild(editButton);
+
+            // Create delete button
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.onclick = () => deleteNote(index);
+            deleteButton.draggable = false;
+            li.appendChild(deleteButton);
+
+            // Make the list item draggable
+            li.draggable = true;
+            li.addEventListener('dragstart', function (e) {
+                this.classList.add('dragging');
+                e.dataTransfer.setData('text/plain', index);
+            });
+            li.addEventListener('dragend', function () {
+                this.classList.remove('dragging');
+            });
+
             noteList.appendChild(li);
         }
     });
@@ -100,6 +143,39 @@ function loadNotes() {
     }
     updateWordCount();
 }
+
+// Allow dropping by preventing default behavior
+noteList.addEventListener('dragover', function (e) {
+    e.preventDefault();
+});
+
+// Handle the drop event to reorder notes
+noteList.addEventListener('drop', function (e) {
+    e.preventDefault();
+    const draggedIndex = parseInt(e.dataTransfer.getData('text/plain'));
+    const targetIndex = getTargetIndex(e);
+    const P = pinnedNotes.length;
+    const allNotes = [...pinnedNotes, ...notes.filter(note => !pinnedNotes.includes(note))];
+
+    if (draggedIndex < P && targetIndex <= P) {
+        // Reorder within pinned notes
+        const note = pinnedNotes.splice(draggedIndex, 1)[0];
+        pinnedNotes.splice(targetIndex, 0, note);
+        localStorage.setItem('pinnedNotes', JSON.stringify(pinnedNotes));
+    } else if (draggedIndex >= P && targetIndex >= P) {
+        // Reorder within unpinned notes
+        const unpinnedNotes = notes.filter(note => !pinnedNotes.includes(note));
+        const draggedNote = unpinnedNotes[draggedIndex - P];
+        unpinnedNotes.splice(draggedIndex - P, 1);
+        unpinnedNotes.splice(targetIndex - P, 0, draggedNote);
+        // Reconstruct the notes array
+        const pinnedInNotes = notes.filter(note => pinnedNotes.includes(note));
+        notes = [...pinnedInNotes, ...unpinnedNotes];
+        localStorage.setItem('notes', JSON.stringify(notes));
+    }
+    // No action if dragged between sections (e.g., pinned to unpinned)
+    loadNotes();
+});
 
 saveButton.addEventListener('click', function () {
     const noteText = noteInput.innerHTML.trim();
@@ -220,16 +296,6 @@ olButton.addEventListener('click', function () {
 
 h1Button.addEventListener('click', function () {
     document.execCommand('formatBlock', false, 'h1');
-    noteInput.focus();
-});
-
-h2Button.addEventListener('click', function () {
-    document.execCommand('formatBlock', false, 'h2');
-    noteInput.focus();
-});
-
-h3Button.addEventListener('click', function () {
-    document.execCommand('formatBlock', false, 'h3');
     noteInput.focus();
 });
 
