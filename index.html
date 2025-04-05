@@ -7,24 +7,28 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Notepad</h1>
-    <div class="toolbar">
-      <button id="boldButton">B</button>
-      <button id="italicButton">I</button>
-      <button id="ulButton">UL</button>
-      <button id="olButton">OL</button>
+    <div class="container">
+      <h1>Notepad</h1>
+      <div class="toolbar">
+        <button id="boldButton">B</button>
+        <button id="italicButton">I</button>
+        <button id="ulButton">UL</button>
+        <button id="olButton">OL</button>
+      </div>
+      <div
+        id="noteInput"
+        contenteditable="true"
+        class="editor"
+        placeholder="Type your note here..."
+      ></div>
+      <div id="wordCount">Word Count: 0</div>
+      <br />
+      <button class="bottombuttons" id="saveButton">Add Note</button>
+      <button class="bottombuttons" id="clearButton">Clear Input</button>
+      <h2>Your Notes</h2>
+      <input type="text" id="searchInput" placeholder="Search notes..." />
+      <ul id="noteList"></ul>
     </div>
-    <div
-      id="noteInput"
-      contenteditable="true"
-      class="editor"
-      placeholder="Type your note here..."
-    ></div>
-    <br />
-    <button id="saveButton">Add Note</button>
-    <button id="clearButton">Clear Input</button>
-    <h2>Your Notes</h2>
-    <ul id="noteList"></ul>
 
     <script src="script.js"></script>
   </body>

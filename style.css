@@ -8,6 +8,13 @@ h1 {
     color: #333;
 }
 
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .toolbar {
     margin-bottom: 10px;
 }
@@ -44,6 +51,12 @@ h1 {
     color: #999;
 }
 
+#wordCount {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0;
+}
+
 button {
     padding: 10px 20px;
     font-size: 16px;
@@ -58,6 +71,20 @@ button:hover {
     background-color: #45a049;
 }
 
+.bottombuttons{
+    margin: 5px;
+}
+
+#searchInput {
+    width: 100%;
+    max-width: 500px;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
 #noteList {
     list-style-type: none;
     padding: 0;
@@ -69,7 +96,7 @@ button:hover {
     margin: 5px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
-    display: 'flex';
+    display: flex;
     justify-content: space-between;
     align-items: center;
 }
@@ -90,4 +117,17 @@ button:hover {
 
 .note-item .edit-button:hover {
     background-color: #1976D2;
+}
+
+.note-item .pin-button {
+    background-color: #FFC107;
+    margin-left: 10px;
+}
+
+.note-item .pin-button:hover {
+    background-color: #FFA000;
+}
+
+.pinned {
+    background-color: #fff9c4;
 }
