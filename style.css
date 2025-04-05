@@ -4,29 +4,44 @@ body {
     background-color: #f0f0f0;
 }
 
-.container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
 h1 {
     color: #333;
 }
 
-a{
-    text-decoration: none;
-    color: black;
+.toolbar {
+    margin-bottom: 10px;
 }
 
-textarea {
+.toolbar button {
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #ddd;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.toolbar button:hover {
+    background-color: #bbb;
+}
+
+.editor {
     width: 100%;
-    max-width: 699px;
+    max-width: 500px;
+    min-height: 200px;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 12px;
+    border-radius: 4px;
+    background-color: white;
+    outline: none;
+}
+
+.editor:empty:before {
+    content: attr(placeholder);
+    color: #999;
 }
 
 button {
@@ -41,4 +56,38 @@ button {
 
 button:hover {
     background-color: #45a049;
+}
+
+#noteList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.note-item {
+    background-color: white;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: 'flex';
+    justify-content: space-between;
+    align-items: center;
+}
+
+.note-item button {
+    margin-left: 10px;
+    background-color: #ff4444;
+}
+
+.note-item button:hover {
+    background-color: #cc0000;
+}
+
+.note-item .edit-button {
+    background-color: #2196F3;
+    margin-left: 10px;
+}
+
+.note-item .edit-button:hover {
+    background-color: #1976D2;
 }

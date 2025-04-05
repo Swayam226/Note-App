@@ -7,17 +7,24 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container">
-      <h1><a href="index.html">Notepad</a></h1>
-      <textarea
-        id="noteInput"
-        rows="40"
-        cols="150"
-        placeholder="Type your notes here..."
-      ></textarea>
-      <br />
-      <button id="saveButton">Save Note</button>
+    <h1>Notepad</h1>
+    <div class="toolbar">
+      <button id="boldButton">B</button>
+      <button id="italicButton">I</button>
+      <button id="ulButton">UL</button>
+      <button id="olButton">OL</button>
     </div>
+    <div
+      id="noteInput"
+      contenteditable="true"
+      class="editor"
+      placeholder="Type your note here..."
+    ></div>
+    <br />
+    <button id="saveButton">Add Note</button>
+    <button id="clearButton">Clear Input</button>
+    <h2>Your Notes</h2>
+    <ul id="noteList"></ul>
 
     <script src="script.js"></script>
   </body>
